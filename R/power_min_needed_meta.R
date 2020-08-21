@@ -10,7 +10,7 @@
 #' or "fixed." If the meta-analysis is a fixed-effects meta-analysis, use "fixed" for heterogeneity.
 #' @param alpha The significance level of the meta-analysis
 #' @param two_tailed Whether the analysis will conduct a two-tailed test
-#' @param power_level The desired power level. Generally
+#' @param power_level The desired power level. This is generally .80
 #'
 #' @details This function calculates the minimum number of studies required to obtain a desired level of power.
 #' Researchers can conduct a power analysis after performing a scoping review to determine whether there
@@ -35,7 +35,7 @@
 #'
 #' # Example 1: The number of studies needed to achieve 80% power using a one-tailed fixed-effects model.
 #' We assume we will have 20 total individuals per comparison, and we have an anticipated effect size of .15
-#' poower_min_needed_meta(es = .15, total_n = 20, heterogeneity = "fixed", two_tailed = FALSE, power_level = .80)
+#' power_min_needed_meta(es = .15, total_n = 20, heterogeneity = "fixed", two_tailed = FALSE, power_level = .80)
 #'
 
 power_min_needed_meta = function(es,
@@ -91,5 +91,5 @@ power_min_needed_meta = function(es,
   }
 
 
-  return(paste(k, "studies needed"))
+  return(k)
 }

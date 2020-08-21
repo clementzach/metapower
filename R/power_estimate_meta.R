@@ -92,7 +92,7 @@ power_estimate_meta = function(k,
   lamda <- es/sqrt(var_overall_es)
   power <- 1 - pnorm(z_needed - lamda)
 
-  return(paste("The power for this analysis will be ", round(power, 3)))
+  return(power)
 
 
 }

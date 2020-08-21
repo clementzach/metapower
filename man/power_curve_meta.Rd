@@ -17,8 +17,8 @@ power_curve_meta(lower_limit = 1, upper_limit = 100, es, total_n, heterogeneity 
   \item{es}{The minimum effect size of interest, expressed as the standardized mean difference}
   \item{total_n}{the total number of individuals in each comparison (both control and experimental groups)}
   \item{heterogeneity}{The level of heterogeneity expected. Can take the values of "small", "moderate", "large", or "fixed." If the meta-analysis is a fixed-effects meta-analysis, use "fixed" for heterogeneity.}
-  \item{alpha} {The significance level of the meta-analysis}
-  \item{two_tailed} {Whether the analysis will conduct a two-tailed test}
+  \item{alpha}{The significance level of the meta-analysis}
+  \item{two_tailed}{Whether the analysis will conduct a two-tailed test}
 }
 \details{
 A power curve is used to determine the number of studies needed to find a true effect of a given size. Researchers can use a power curve to determine whether there are enough studies to perform an analysis. They can also use a power curve after conducting a meta-analysis to determine whether they would have found an effect of interest with their number of studies. This function uses formulas provided by Valentine et al (2010) to estimate power for a given scenario.
@@ -27,10 +27,10 @@ A power curve is used to determine the number of studies needed to find a true e
 This returns a plot with the power curve
 }
 \references{
-Valentine, J. C., Pigott, T. D., & Rothstein, H. R. (2010). How many studies do you need? A primer on statistical power for meta-analysis. Journal of Educational and Behavioral Statistics, 35(2), 215-247.
+Valentine, J. C., Pigott, T. D., & Rothstein, H. R. (2010). How many studies do you need? A primer on statistical power for meta-analysis. \emph{Journal of Educational and Behavioral Statistics, 35}(2), 215-247.
 }
 \author{
-Zachary clement
+Zachary Clement
 }
 \note{
 %%  ~~further notes~~

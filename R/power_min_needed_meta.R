@@ -47,11 +47,20 @@ power_min_needed_meta = function(es,
   if (missing(es)) {
     stop("The effect size of interest (es) must be included")
   }
-  if(es < 0 | es > 1) {
-    stop("The effect size (es) must be between zero and one")
+  if(es < 0) {
+    stop("The effect size (es) must be positive")
+  }
+  if(total_n < 0) {
+    stop("The number of participants must be positive")
+  }
+  if(alpha < 0 | alpha > 1){
+    stop("The confidence level (alpha) must be between 0 and 1")
   }
   if(missing(total_n)) {
     stop("The total number of participants per comparison (total_n) must be included")
+  }
+  if (power_level < 0 | power_level > 1){
+    stop("The power level must be between 0 and 1")
   }
 
 

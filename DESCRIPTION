@@ -3,7 +3,7 @@ Type: Package
 Title: Power Calculations for Meta-analysis
 Version: 0.1.0
 Author: Zachary Clement
-Maintainer: Zachary Clement clementzach@icloud.com
+Maintainer: Zachary Clement <clementzach@icloud.com>
 Description: This package creates power curves, calculates power estimates, and calculates the minimum number of studies needed for a desired level of power.
 License: None
 Encoding: UTF-8

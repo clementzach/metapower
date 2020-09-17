@@ -44,9 +44,11 @@ power_curve_meta = function(lower_limit = 1,
                             upper_limit = 100,
                             es,
                             total_n,
-                            heterogeneity = "fixed",
+                            heterogeneity_vector = "fixed",
                             alpha =.05,
-                            two_tailed = TRUE){
+                            two_tailed = TRUE,
+                            col_list = c("black", "blue4", "blue1", "turquoise")
+                            ){
 
   if (missing(es)) {
     stop("The effect size of interest (es) must be included")
@@ -69,6 +71,8 @@ power_curve_meta = function(lower_limit = 1,
   if(missing(total_n)) {
     stop("The total number of participants per comparison (total_n) must be included")
   }
+
+  heterogeneity <- heterogeneity_vector[1]
 
   if (heterogeneity == "small") {
     hg_num <- .33
@@ -108,10 +112,54 @@ power_curve_meta = function(lower_limit = 1,
   }
 
 
+
   plot(lower_limit:upper_limit, power_vector,
        xlab = "Number of Studies",
        ylab = "Power",
        main = "Power Curve",
-       sub = paste("assuming ES of ", es, ", N of ", total_n, ", and ", heterogeneity, " heterogeneity", sep = ""),
+       sub = paste("assuming ES of ", es, ", N of ", total_n, ", and ", paste(heterogeneity_vector, collapse = ", "), " heterogeneity", sep = ""),
        type = "l")
+
+
+  if (length(heterogeneity_vector) > 1){
+    for (het_val in 2:length(heterogeneity_vector)){
+      heterogeneity <- heterogeneity_vector[het_val]
+
+      if (heterogeneity == "small") {
+        hg_num <- .33
+      }
+      if (heterogeneity == "moderate") {
+        hg_num <- 1.0
+      }
+      if (heterogeneity == "large") {
+        hg_num <- 3.0
+      }
+      if (heterogeneity == "fixed") {
+        hg_num <- 0
+      }
+      if (match(heterogeneity, c("small", "moderate", "large", "fixed"), nomatch = 0) == 0) {
+        stop("Error: Heterogeneity string is not recognized. Use small, medium, large, or fixed")
+      }
+
+      for (i in 1:length(power_vector)) {
+
+        k <- lower_limit + i - 1
+
+        var_individual_es <- total_n / ((total_n / 2)^2) + (es^2) / (2 * (total_n))
+        rand_effect_correction <- hg_num * var_individual_es #if no heterogeneity, this will be 0
+        corrected_var_ind_es <- rand_effect_correction + var_individual_es
+        var_overall_es <- corrected_var_ind_es / k
+        lamda <- es/sqrt(var_overall_es)
+        power_vector[i] <- (1 - pnorm(z_needed - lamda))
+      }
+
+      lines(x = lower_limit:upper_limit, y = power_vector, col = col_list[het_val])
+
+    }
+    legend(x = "bottomright",
+           legend = heterogeneity_vector,
+           fill = col_list[1: length(heterogeneity_vector)],
+           title = "Heterogeneity")
+  }
+
 }
